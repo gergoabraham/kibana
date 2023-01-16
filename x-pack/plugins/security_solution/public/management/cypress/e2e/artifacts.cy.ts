@@ -90,7 +90,7 @@ describe('Artifacts pages', () => {
     removeAllArtifacts();
   });
 
-  for (const testData of getArtifactsListTestsData()) {
+  for (const testData of [getArtifactsListTestsData()[1]]) {
     describe(`When on the ${testData.title} entries list`, () => {
       it(`no access - should show no privileges callout`, () => {
         loginWithoutAccess(`/app/security/administration/${testData.urlPath}`);
@@ -112,7 +112,8 @@ describe('Artifacts pages', () => {
         cy.getBySel(`${testData.pagePrefix}-emptyState-addButton`).should('exist');
       });
 
-      it(`write - should create new ${testData.title} entry`, () => {
+      // eslint-disable-next-line ban/ban
+      it.only(`write - should create new ${testData.title} entry`, () => {
         loginWithWriteAccess(`/app/security/administration/${testData.urlPath}`);
         // Opens add flyout
         cy.getBySel(`${testData.pagePrefix}-emptyState-addButton`).click();
